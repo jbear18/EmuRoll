@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 public class MikeMackEmu{
 	GamePanel gamepanel;
-	final static int WIDTH = 500;
+	final static int WIDTH = 2000;
 	final static int HEIGHT = 800;
 	JFrame frame;
 	public static void main(String[] args) {
@@ -21,7 +21,7 @@ emu.setup();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane();
-		frame.setPreferredSize(new Dimension(500, 800));
+		frame.setPreferredSize(new Dimension(2000, 800));
 		frame.pack();
 		gamepanel.startGame();
 

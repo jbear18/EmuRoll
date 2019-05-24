@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,6 +11,12 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Timer timer;
+	
+	Font titleFont;
+	
+	Font emuFont;
+	
+	Font regularFont;
 	
 	final int MENU_STATE = 0;
 
@@ -41,7 +48,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	}
 	public GamePanel() {
 		timer = new Timer(1000/60, this);
-	
+		titleFont= new Font("Courier", Font.PLAIN, 50);
+	emuFont= new Font("Courier New", Font.ITALIC, 40);
+	regularFont= new Font("Courier New", Font.PLAIN, 30);
 	}
 	public void startGame() {
 		timer.start();
@@ -78,17 +87,34 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.yellow);
 
-		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);    
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);  
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("Emu Roll", 900, 200);
+		g.setFont(emuFont);
+		g.drawString("emu vs mike", 900, 250);
+		g.setFont(regularFont);
+		g.drawString("Game created by Jessie Shen", 800, 380);
+		g.drawString("Press ENTER to start the war!!", 750, 700);
 	}
 	void drawGameState(Graphics g) {
 		g.setColor(Color.green);
 
-		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);    
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);  
+		
 }
 	void drawEndState(Graphics g) {
 		g.setColor(Color.red);
 
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);    
+		g.setColor(Color.BLACK);
+		g.setFont(titleFont);
+		g.drawString("༼ つ ಥ_ಥ ༽つ", 900, 200);
+		g.setFont(emuFont);
+		g.drawString("...death", 900, 250);
+		g.setFont(regularFont);
+		g.drawString("buy the full game for [̲̅$̲̅(̲̅1,000,001)̲̅$̲̅]", 800, 380);
+		g.drawString("-You earned 0 points-", 750, 700);
 	}
 	@Override
 	public void keyTyped(KeyEvent e) {

@@ -113,7 +113,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setFont(emuFont);
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("buy the full game for [̲̅$̲̅(̲̅1,000,001)̲̅$̲̅]", 800, 380);
+		g.drawString("buy the full game for [̲̅$̲̅(̲̅1,000,001)̲̅$̲̅]", 700, 380);
 		g.drawString("-You earned 0 points-", 750, 700);
 	}
 	@Override

@@ -11,6 +11,7 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener{
 	Timer timer;
+	Rocketship rocket= new Rocketship(250, 700, 50, 50);
 	
 	Font titleFont;
 	
@@ -79,7 +80,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		
 	}
 	void updateGameState() {
-		
+	rocket.update();	
 	}
 	void updateEndState() {
 		
@@ -101,7 +102,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setColor(Color.green);
 
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);  
-		
+		g.setColor(Color.DARK_GRAY);
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
+		g.setColor(Color.WHITE);
+	g.fillOval(1500, 100, 100, 100);
+	rocket.draw(g);
 }
 	void drawEndState(Graphics g) {
 		g.setColor(Color.red);
@@ -113,7 +118,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener{
 		g.setFont(emuFont);
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("buy the full game for [̲̅$̲̅(̲̅1,000,001)̲̅$̲̅]", 700, 380);
+		g.drawString("mike has won. his head shall haunt you forever", 700, 380);
 		g.drawString("-You earned 0 points-", 750, 700);
 	}
 	@Override

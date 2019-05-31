@@ -22,12 +22,10 @@ public class GameObject {
 	}
 
 	void update() {
-		collisionBox = new Rectangle(x, y, width, height);
-		x+=5;
-		y+=5;
+		
 	}
 
 	void draw(Graphics g) {
-	    g.fillRect(x, y, width, height);
+	   
 	}
 }

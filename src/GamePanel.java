@@ -5,13 +5,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
-	Rocketship rocket = new Rocketship(250, 700, 50, 50);
+	public static BufferedImage cloudImg;
+	public static BufferedImage emuImg;
+	Rocketship rocket = new Rocketship(250, 300, 50, 50);
 
 	Font titleFont;
 
@@ -52,6 +57,16 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		titleFont = new Font("Courier", Font.PLAIN, 50);
 		emuFont = new Font("Courier New", Font.ITALIC, 40);
 		regularFont = new Font("Courier New", Font.PLAIN, 30);
+		 try {
+             cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
+             emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
+     } catch (IOException e) {
+
+             // TODO Auto-generated catch block
+
+             e.printStackTrace();
+
+     }
 	}
 
 	public void startGame() {
@@ -99,6 +114,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(emuFont);
 		g.drawString("emu vs mike", 900, 250);
 		g.setFont(regularFont);
+		g.drawString("Instructions: Use arrow keys to go up, left, right.Jump over obstacles", 300, 500);
 		g.drawString("Game created by Jessie Shen", 800, 380);
 		g.drawString("Press ENTER to start the war!!", 750, 700);
 	}
@@ -107,10 +123,11 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.green);
 
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
-		g.setColor(Color.DARK_GRAY);
-		g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
-		g.setColor(Color.WHITE);
-		g.fillOval(1500, 100, 100, 100);
+		g.setColor(new Color (141, 255, 2));
+g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
+		g.setColor(new Color (186,212,255));
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, 400);
+		 g.drawImage(cloudImg, 1000, 100, 200, 100, null);
 		rocket.draw(g);
 	}
 

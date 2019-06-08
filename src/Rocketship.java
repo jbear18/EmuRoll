@@ -20,7 +20,7 @@ void update() {
 	}
 }
 void draw(Graphics g) {
-	 g.setColor(Color.BLACK);
-g.fillRect(x, y, 50, 100);
+    g.drawImage(GamePanel.emuImg, x, y, 400, 400, null);
+
 }
 }

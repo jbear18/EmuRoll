@@ -8,8 +8,8 @@ public class MikeMackEmu{
 	final static int HEIGHT = 800;
 	JFrame frame;
 	public static void main(String[] args) {
-MikeMackEmu emu= new MikeMackEmu();
-emu.setup();
+MikeMackEmu emugame= new MikeMackEmu();
+emugame.setup();
 	}
 	public MikeMackEmu() {
 		frame = new JFrame("MikeMackEmu");

@@ -14,9 +14,12 @@ import javax.swing.Timer;
 
 public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
+	Timer headSpawn;
+	ObjectManager objectmanager;
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
-	Rocketship rocket = new Rocketship(250, 300, 50, 50);
+	public static BufferedImage headImg;
+	Emu emu = new Emu(250, 300, 50, 50);
 
 	Font titleFont;
 
@@ -53,6 +56,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public GamePanel() {
+		objectmanager= new ObjectManager(emu);
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Courier", Font.PLAIN, 50);
 		emuFont = new Font("Courier New", Font.ITALIC, 40);
@@ -60,6 +64,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 try {
              cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
              emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
+             headImg = ImageIO.read(this.getClass().getResourceAsStream("head.jpg"));
      } catch (IOException e) {
 
              // TODO Auto-generated catch block
@@ -70,6 +75,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void startGame() {
+		headSpawn= new Timer(1000,objectmanager);
+		headSpawn.start();
 		timer.start();
 	}
 
@@ -97,7 +104,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		rocket.update();
+objectmanager.update();
 	}
 
 	void updateEndState() {
@@ -128,7 +135,8 @@ g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
 		g.setColor(new Color (186,212,255));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 400);
 		 g.drawImage(cloudImg, 1000, 100, 200, 100, null);
-		rocket.draw(g);
+		objectmanager.draw(g);
+		
 	}
 
 	void drawEndState(Graphics g) {
@@ -154,29 +162,29 @@ g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-if(e.getKeyCode()==37) {
-	rocket.left=true;
+if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+	emu.left=true;
 }
-if(e.getKeyCode()==39) {
-	rocket.right=true;
+if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+	emu.right=true;
 }
-if(e.getKeyCode()==10) {
+if(e.getKeyCode()==KeyEvent.VK_ENTER) {
 	if (CURRENT_STATE == MENU_STATE) {
 
 		CURRENT_STATE = GAME_STATE;
-
+		startGame();
 	}
 
 	else if (CURRENT_STATE == GAME_STATE) {
 
 		CURRENT_STATE = END_STATE;
-
+	
 	}
 
 	else if (CURRENT_STATE == END_STATE) {
 
 		CURRENT_STATE = MENU_STATE;
-
+		startGame();
 	}
 }
 
@@ -186,11 +194,11 @@ if(e.getKeyCode()==10) {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==37) {
-			rocket.left=false;
+		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
+			emu.left=false;
 		}
-		if(e.getKeyCode()==39) {
-			rocket.right=false;
+		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
+			emu.right=false;
 		}
 	}
 }

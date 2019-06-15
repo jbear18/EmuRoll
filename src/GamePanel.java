@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	ObjectManager objectmanager;
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
-	public static BufferedImage headImg;
+	public static BufferedImage evilguyImg;
 	Emu emu = new Emu(250, 300, 50, 50);
 
 	Font titleFont;
@@ -64,7 +64,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		 try {
              cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
              emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
-             headImg = ImageIO.read(this.getClass().getResourceAsStream("head.jpg"));
+             evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
      } catch (IOException e) {
 
              // TODO Auto-generated catch block
@@ -105,6 +105,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 objectmanager.update();
+objectmanager.manageEnemies();
 	}
 
 	void updateEndState() {

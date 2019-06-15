@@ -9,8 +9,10 @@ public class MikesHead extends GameObject{
 	}
 void update() {
 	x--;
+	y+=8;
+	
 }
 void draw(Graphics g) {
-	 g.drawImage(GamePanel.headImg, x, y, 900, 400, null);
+	 g.drawImage(GamePanel.evilguyImg, x, y, 70, 90, null);
 }
 }

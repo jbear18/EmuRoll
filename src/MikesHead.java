@@ -2,14 +2,23 @@ import java.awt.Graphics;
 
 public class MikesHead extends GameObject{
 
-	public MikesHead(int x, int y, int width, int height) {
+int type=0;
+	public MikesHead(int x, int y, int width, int height, int type) {
 		super(x, y, width, height);
+		this.type=type;
+		
 		// TODO Auto-generated constructor stub
 		
 	}
 void update() {
+	super.update();
+	if(type==0) {
+		x--;
+		y+=8;
+	}
+if(type==1) {
 	x--;
-	y+=8;
+}
 	
 }
 void draw(Graphics g) {

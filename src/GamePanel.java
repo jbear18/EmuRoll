@@ -106,6 +106,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	void updateGameState() {
 objectmanager.update();
 objectmanager.manageEnemies();
+objectmanager.checkCollision();
 	}
 
 	void updateEndState() {
@@ -122,7 +123,7 @@ objectmanager.manageEnemies();
 		g.setFont(emuFont);
 		g.drawString("emu vs mike", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("Instructions: Use arrow keys to go up, left, right.Jump over obstacles", 300, 500);
+		g.drawString("Instructions: Use arrow keys to go up, left, and right.Avoid obstacles and jump over them", 300, 500);
 		g.drawString("Game created by Jessie Shen", 800, 380);
 		g.drawString("Press ENTER to start the war!!", 750, 700);
 	}

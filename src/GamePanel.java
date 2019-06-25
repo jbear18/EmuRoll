@@ -19,7 +19,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
 	public static BufferedImage evilguyImg;
-	Emu emu = new Emu(250, 300, 50, 50);
+	Emu emu = new Emu(250, 300, 349, 400);
 
 	Font titleFont;
 
@@ -56,26 +56,26 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public GamePanel() {
-		objectmanager= new ObjectManager(emu);
+		objectmanager = new ObjectManager(emu);
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Courier", Font.PLAIN, 50);
 		emuFont = new Font("Courier New", Font.ITALIC, 40);
 		regularFont = new Font("Courier New", Font.PLAIN, 30);
-		 try {
-             cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
-             emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
-             evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
-     } catch (IOException e) {
+		try {
+			cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
+			emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
+			evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
+		} catch (IOException e) {
 
-             // TODO Auto-generated catch block
+			// TODO Auto-generated catch block
 
-             e.printStackTrace();
+			e.printStackTrace();
 
-     }
+		}
 	}
 
 	public void startGame() {
-		headSpawn= new Timer(1000,objectmanager);
+		headSpawn = new Timer(1000, objectmanager);
 		headSpawn.start();
 		timer.start();
 	}
@@ -104,9 +104,13 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-objectmanager.update();
-objectmanager.manageEnemies();
-objectmanager.checkCollision();
+		objectmanager.update();
+		objectmanager.manageEnemies();
+		objectmanager.checkCollision();
+		objectmanager.purgeObjects();
+		if (emu.isAlive == false) {
+			CURRENT_STATE = END_STATE;
+		}
 	}
 
 	void updateEndState() {
@@ -123,7 +127,8 @@ objectmanager.checkCollision();
 		g.setFont(emuFont);
 		g.drawString("emu vs mike", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("Instructions: Use arrow keys to go up, left, and right.Avoid obstacles and jump over them", 300, 500);
+		g.drawString("Instructions: Use arrow keys to go up, left, and right.Avoid obstacles and jump over them", 300,
+				500);
 		g.drawString("Game created by Jessie Shen", 800, 380);
 		g.drawString("Press ENTER to start the war!!", 750, 700);
 	}
@@ -132,13 +137,13 @@ objectmanager.checkCollision();
 		g.setColor(Color.green);
 
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
-		g.setColor(new Color (141, 255, 2));
-g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
-		g.setColor(new Color (186,212,255));
+		g.setColor(new Color(141, 255, 2));
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
+		g.setColor(new Color(186, 212, 255));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 400);
-		 g.drawImage(cloudImg, 1000, 100, 200, 100, null);
+		g.drawImage(cloudImg, 1000, 100, 200, 100, null);
 		objectmanager.draw(g);
-		
+
 	}
 
 	void drawEndState(Graphics g) {
@@ -158,49 +163,47 @@ g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
 	@Override
 	public void keyTyped(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println("jump");
 	}
 
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-	emu.left=true;
-}
-if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-	emu.right=true;
-}
-if(e.getKeyCode()==KeyEvent.VK_ENTER) {
-	if (CURRENT_STATE == MENU_STATE) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			emu.left = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			emu.right = true;
+		}
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			if (CURRENT_STATE == MENU_STATE) {
 
-		CURRENT_STATE = GAME_STATE;
-		startGame();
+				CURRENT_STATE = GAME_STATE;
+				startGame();
+			}
+
+			else if (CURRENT_STATE == GAME_STATE) {
+
+				CURRENT_STATE = END_STATE;
+
+			}
+
+			else if (CURRENT_STATE == END_STATE) {
+
+				CURRENT_STATE = MENU_STATE;
+				startGame();
+			}
+		}
+
 	}
-
-	else if (CURRENT_STATE == GAME_STATE) {
-
-		CURRENT_STATE = END_STATE;
-	
-	}
-
-	else if (CURRENT_STATE == END_STATE) {
-
-		CURRENT_STATE = MENU_STATE;
-		startGame();
-	}
-}
-
-
-}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getKeyCode()==KeyEvent.VK_LEFT) {
-			emu.left=false;
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+			emu.left = false;
 		}
-		if(e.getKeyCode()==KeyEvent.VK_RIGHT) {
-			emu.right=false;
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+			emu.right = false;
 		}
 	}
 }

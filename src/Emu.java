@@ -23,6 +23,7 @@ void update() {
 }
 void draw(Graphics g) {
     g.drawImage(GamePanel.emuImg, x, y, 400, 400, null);
-
+//    g.setColor(Color.red);
+//g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 }
 }

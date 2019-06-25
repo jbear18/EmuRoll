@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class MikesHead extends GameObject{
@@ -23,5 +24,7 @@ if(type==1) {
 }
 void draw(Graphics g) {
 	 g.drawImage(GamePanel.evilguyImg, x, y, 70, 90, null);
+//	 g.setColor(Color.red);
+//	 g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 }
 }

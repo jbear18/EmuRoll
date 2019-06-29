@@ -1,11 +1,16 @@
+import java.applet.AudioClip;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.swing.JApplet;
+
 public class ObjectManager implements ActionListener{
 	Emu emu;
+	public static AudioClip crowCaw;
+	public static AudioClip endgame;
 	int score=0;
 long enemyTimer=0;
 long slidingEnemyTimer= 0;
@@ -13,18 +18,24 @@ long slidingEnemyTimer= 0;
 	int slidingenemySpawnTime= 12000;
 	ArrayList <MikesHead> heads= new ArrayList <MikesHead>();
 	ArrayList<MikesHead>slidingheads= new ArrayList <MikesHead>();
+	
 public ObjectManager(Emu emu) {
 	this.emu= emu;
+	loadSounds();
 }
 void update() {
 	
 	emu.update();
 	for (int i = 0; i < heads.size(); i++) {
-	heads.get(i).update();	
+	heads.get(i).update();
+	
 	}
+	enemySpawnTime-=0.01;
 	for (int i = 0; i < slidingheads.size(); i++) {
-	slidingheads.get(i).update();	
+	slidingheads.get(i).update();
+
 	}
+	slidingenemySpawnTime-=0.01;
 }
 void draw(Graphics g) {
 	emu.draw(g);
@@ -76,6 +87,20 @@ for (int i = 0; i < slidingheads.size(); i++) {
 	}
 }	
 }
+public void purgeAllObjects() {
+	for (int i = 0; i < heads.size(); i++) {
+		
+			heads.remove(i);
+			System.out.println(i);
+		
+	}	
+	for (int i = 0; i < slidingheads.size(); i++) {
+		
+			slidingheads.remove(i);
+			System.out.println(i);
+		
+	}	
+}
 public void checkCollision() {
 	for(MikesHead mikeshead : heads){
 
@@ -100,7 +125,20 @@ System.out.println("hello");
 public int getScore() {
 	return score;
 }
+public void loadSounds() {
 
+   crowCaw = JApplet.newAudioClip(getClass().getResource("crow_caw.wav")); 
+   endgame= JApplet.newAudioClip(getClass().getResource("162800__timgormly__8-bit-flyby.wav"));
+
+}
+public static void playSound(String fileName) {
+	if(fileName.equals("crow_caw.wav")) {
+		crowCaw.play();
+	}
+	if(fileName.equals("162800__timgormly__8-bit-flyby.wav")) {
+		endgame.play();
+	}
+}
 
 @Override
 public void actionPerformed(ActionEvent e) {

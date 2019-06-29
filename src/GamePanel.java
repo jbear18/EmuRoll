@@ -75,10 +75,17 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void startGame() {
+		objectmanager.purgeAllObjects();
 	objectmanager.emu.isAlive= true;
+	objectmanager.emu.x=250;
 		headSpawn = new Timer(1000, objectmanager);
 		headSpawn.start();
 		timer.start();
+objectmanager.score=0;
+	
+	
+		
+		
 	}
 
 	@Override
@@ -119,10 +126,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawMenuState(Graphics g) {
-		g.setColor(Color.yellow);
-
-		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
+		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
 		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
+		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("Emu Roll", 900, 200);
 		g.setFont(emuFont);
@@ -148,8 +155,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
+		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
 		g.setColor(Color.red);
-
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
 		g.setColor(Color.BLACK);
 		g.setFont(titleFont);
@@ -157,7 +164,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.setFont(emuFont);
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("mike has won. his head shall haunt you forever", 700, 380);
+		g.drawString("Press ENTER to restart", 700, 500);
 		g.drawString("-You earned "+ objectmanager.score+ " points-", 750, 700);
 	}
 
@@ -171,15 +178,18 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			emu.left = true;
+			objectmanager.playSound("crow_caw.wav");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			emu.right = true;
+			objectmanager.playSound("crow_caw.wav");
 		}
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 			if (CURRENT_STATE == MENU_STATE) {
 
 				CURRENT_STATE = GAME_STATE;
 				startGame();
+				objectmanager.playSound("crow_caw.wav");
 			}
 		
 

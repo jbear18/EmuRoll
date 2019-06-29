@@ -75,6 +75,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	public void startGame() {
+	objectmanager.emu.isAlive= true;
 		headSpawn = new Timer(1000, objectmanager);
 		headSpawn.start();
 		timer.start();
@@ -157,7 +158,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
 		g.drawString("mike has won. his head shall haunt you forever", 700, 380);
-		g.drawString("-You earned 0 points-", 750, 700);
+		g.drawString("-You earned "+ objectmanager.score+ " points-", 750, 700);
 	}
 
 	@Override
@@ -180,6 +181,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				CURRENT_STATE = GAME_STATE;
 				startGame();
 			}
+		
 
 			else if (CURRENT_STATE == GAME_STATE) {
 

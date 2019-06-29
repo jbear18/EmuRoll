@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class ObjectManager implements ActionListener{
 	Emu emu;
+	int score=0;
 long enemyTimer=0;
 long slidingEnemyTimer= 0;
 	int enemySpawnTime= 700;
@@ -51,11 +52,13 @@ slidingEnemyTimer = System.currentTimeMillis();
 for (int i = 0; i < heads.size(); i++) {
 	if(heads.get(i).y>MikeMackEmu.HEIGHT) {
 heads.get(i).isAlive=false;
+score++;
 	}
 }
 for (int i = 0; i < slidingheads.size(); i++) {
 	if(slidingheads.get(i).x>MikeMackEmu.WIDTH) {
 slidingheads.get(i).isAlive=false;
+score++;
 	}
 }
 }
@@ -79,6 +82,7 @@ public void checkCollision() {
         if(emu.collisionBox.intersects(mikeshead.collisionBox)){
 
                 emu.isAlive = false;
+                
 System.out.println("hi");
         }
     
@@ -92,6 +96,9 @@ System.out.println("hi");
 System.out.println("hello");
         }
 	}
+}
+public int getScore() {
+	return score;
 }
 
 

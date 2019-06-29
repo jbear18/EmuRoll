@@ -16,6 +16,7 @@ void update() {
 	if(type==0) {
 		x--;
 		y+=8;
+//		
 	}
 if(type==1) {
 	x--;

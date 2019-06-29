@@ -205,5 +205,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			emu.right = false;
 		}
+		if(e.getKeyCode()==KeyEvent.VK_UP) {
+			emu.jump();
+
+		}
 	}
 }

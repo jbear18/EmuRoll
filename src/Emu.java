@@ -5,6 +5,9 @@ public class Emu extends GameObject{
 	int speed;
 	boolean left;
 	boolean right;
+	int velocity=0;
+	boolean isJumping= false;
+
 
 	public Emu(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -19,6 +22,20 @@ void update() {
 	if( right==true) {
 		x+=speed;
 	}
+	if(isJumping) {
+		velocity--;
+		y=y-velocity;
+		if(y>300) {
+		y=300;
+		isJumping=false;
+		}
+	}
+
+}
+public void jump() {
+	isJumping=true;
+	velocity=15 ;
+
 
 }
 void draw(Graphics g) {

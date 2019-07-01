@@ -19,6 +19,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
 	public static BufferedImage evilguyImg;
+	public static BufferedImage pixelheartImg;
+	public static BufferedImage noColorPixelHeartImg;
+	public static BufferedImage animatedEmuImg;
+	public static BufferedImage ostrichImg;
 	Emu emu = new Emu(250, 300, 349, 400);
 
 	Font titleFont;
@@ -65,6 +69,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
 			emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
 			evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
+			pixelheartImg = ImageIO.read(this.getClass().getResourceAsStream("pixelheart.jpg"));
+			noColorPixelHeartImg = ImageIO.read(this.getClass().getResourceAsStream("noColorPixelHeart.png"));
+			animatedEmuImg = ImageIO.read(this.getClass().getResourceAsStream("animatedEmu.animated.gif"));
+			ostrichImg = ImageIO.read(this.getClass().getResourceAsStream("sadostrich.jpg"));
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block
@@ -77,6 +85,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public void startGame() {
 		objectmanager.purgeAllObjects();
 	objectmanager.emu.isAlive= true;
+	objectmanager.livesLeft=3;
 	objectmanager.emu.x=250;
 		headSpawn = new Timer(1000, objectmanager);
 		headSpawn.start();
@@ -129,6 +138,7 @@ objectmanager.score=0;
 		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
+		g.drawImage(animatedEmuImg, 30, 500, 300,290, null);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("Emu Roll", 900, 200);
@@ -150,15 +160,32 @@ objectmanager.score=0;
 		g.setColor(new Color(186, 212, 255));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 400);
 		g.drawImage(cloudImg, 1000, 100, 200, 100, null);
+		if(objectmanager.emu.isAlive) {	
+			if(objectmanager.livesLeft>0) {
+				g.drawImage(pixelheartImg, 70, 70, 90, 85, null);
+			}
+			if(objectmanager.livesLeft>1) {
+			g.drawImage(pixelheartImg, 150, 70, 90, 85, null);
+			}
+			if(objectmanager.livesLeft>2) {
+			g.drawImage(pixelheartImg, 230, 70, 90, 85, null);	
+			}
+		}
+		
+		if(objectmanager.emu.isAlive==false) {
+			g.drawImage(noColorPixelHeartImg, 230, 70, 90, 85, null);
+		}
 		objectmanager.draw(g);
 
 	}
 
 	void drawEndState(Graphics g) {
 		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
-		g.setColor(Color.red);
+
+		g.setColor(new Color(130, 9, 31));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
-		g.setColor(Color.BLACK);
+		g.drawImage(ostrichImg, 100, 300, 400, 400, null);
+		g.setColor(Color.white);
 		g.setFont(titleFont);
 		g.drawString("༼ つ ಥ_ಥ ༽つ", 900, 200);
 		g.setFont(emuFont);
@@ -166,6 +193,7 @@ objectmanager.score=0;
 		g.setFont(regularFont);
 		g.drawString("Press ENTER to restart", 700, 500);
 		g.drawString("-You earned "+ objectmanager.score+ " points-", 750, 700);
+
 	}
 
 	@Override

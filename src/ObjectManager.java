@@ -14,6 +14,7 @@ public class ObjectManager implements ActionListener{
 	int score=0;
 long enemyTimer=0;
 long slidingEnemyTimer= 0;
+int livesLeft;
 	int enemySpawnTime= 700;
 	int slidingenemySpawnTime= 12000;
 	ArrayList <MikesHead> heads= new ArrayList <MikesHead>();
@@ -22,6 +23,7 @@ long slidingEnemyTimer= 0;
 public ObjectManager(Emu emu) {
 	this.emu= emu;
 	loadSounds();
+	livesLeft=3;
 }
 void update() {
 	
@@ -30,12 +32,12 @@ void update() {
 	heads.get(i).update();
 	
 	}
-	enemySpawnTime-=0.01;
+	enemySpawnTime-=0.0000000000000001;
 	for (int i = 0; i < slidingheads.size(); i++) {
 	slidingheads.get(i).update();
 
 	}
-	slidingenemySpawnTime-=0.01;
+	slidingenemySpawnTime-=0.00000000000000001;
 }
 void draw(Graphics g) {
 	emu.draw(g);
@@ -105,10 +107,14 @@ public void checkCollision() {
 	for(MikesHead mikeshead : heads){
 
         if(emu.collisionBox.intersects(mikeshead.collisionBox)){
-
-                emu.isAlive = false;
+livesLeft--;
+if(livesLeft<1) {
+    emu.isAlive = false;	
+    System.out.println("hi");
+}
+   
                 
-System.out.println("hi");
+
         }
     
 
@@ -117,8 +123,13 @@ System.out.println("hi");
 
         if(emu.collisionBox.intersects(mikeshead.collisionBox)){
 
-                emu.isAlive = false;
-System.out.println("hello");
+        	livesLeft--;
+        	if(livesLeft<1) {
+        	    emu.isAlive = false;	
+        	    System.out.println("hello");
+        	}
+        	   
+
         }
 	}
 }

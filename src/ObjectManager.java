@@ -52,13 +52,13 @@ void draw(Graphics g) {
 }
 public void manageEnemies(){
     if(System.currentTimeMillis() - enemyTimer >= enemySpawnTime){
-            heads.add((new MikesHead(new Random().nextInt(MikeMackEmu.WIDTH), 0, 5, 5, 0)));
+            heads.add((new MikesHead(new Random().nextInt(MikeMackEmu.WIDTH), 0, 65, 65, 0)));
            
 
 enemyTimer = System.currentTimeMillis();
     }
     else  if(System.currentTimeMillis() - slidingEnemyTimer >= slidingenemySpawnTime){ 
-        slidingheads.add((new MikesHead(MikeMackEmu.WIDTH, 600, 5, 5, 1)));
+        slidingheads.add((new MikesHead(MikeMackEmu.WIDTH, 600, 65, 65, 1)));
 
 slidingEnemyTimer = System.currentTimeMillis();
 }

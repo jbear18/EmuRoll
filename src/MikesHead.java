@@ -24,7 +24,8 @@ if(type==1) {
 	
 }
 void draw(Graphics g) {
-	 g.drawImage(GamePanel.evilguyImg, x, y, 70, 90, null);
+	 g.drawImage(GamePanel.mikeImg, x, y, width, height, null);
+	 super.draw(g);
 //	 g.setColor(Color.red);
 //	 g.drawRect(collisionBox.x, collisionBox.y, collisionBox.width, collisionBox.height);
 }

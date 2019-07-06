@@ -23,7 +23,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	public static BufferedImage noColorPixelHeartImg;
 	public static BufferedImage animatedEmuImg;
 	public static BufferedImage ostrichImg;
-	Emu emu = new Emu(250, 300, 349, 400);
+	public static BufferedImage mikeImg;
+
+	Emu emu = new Emu(250, 400, 249, 300);
 
 	Font titleFont;
 
@@ -73,6 +75,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			noColorPixelHeartImg = ImageIO.read(this.getClass().getResourceAsStream("noColorPixelHeart.png"));
 			animatedEmuImg = ImageIO.read(this.getClass().getResourceAsStream("animatedEmu.animated.gif"));
 			ostrichImg = ImageIO.read(this.getClass().getResourceAsStream("sadostrich.jpg"));
+mikeImg = ImageIO.read(this.getClass().getResourceAsStream("mike-2.png"));
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block

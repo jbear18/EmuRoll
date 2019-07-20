@@ -9,6 +9,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -16,6 +17,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer timer;
 	Timer headSpawn;
 	ObjectManager objectmanager;
+
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
 	public static BufferedImage evilguyImg;
@@ -63,6 +65,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public GamePanel() {
 		objectmanager = new ObjectManager(emu);
+		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Courier", Font.PLAIN, 50);
 		emuFont = new Font("Courier New", Font.ITALIC, 40);
@@ -75,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			noColorPixelHeartImg = ImageIO.read(this.getClass().getResourceAsStream("noColorPixelHeart.png"));
 			animatedEmuImg = ImageIO.read(this.getClass().getResourceAsStream("animatedEmu.animated.gif"));
 			ostrichImg = ImageIO.read(this.getClass().getResourceAsStream("sadostrich.jpg"));
-mikeImg = ImageIO.read(this.getClass().getResourceAsStream("mike-2.png"));
+			mikeImg = ImageIO.read(this.getClass().getResourceAsStream("mike-2.png"));
 		} catch (IOException e) {
 
 			// TODO Auto-generated catch block
@@ -87,17 +90,14 @@ mikeImg = ImageIO.read(this.getClass().getResourceAsStream("mike-2.png"));
 
 	public void startGame() {
 		objectmanager.purgeAllObjects();
-	objectmanager.emu.isAlive= true;
-	objectmanager.livesLeft=3;
-	objectmanager.emu.x=250;
+		objectmanager.emu.isAlive = true;
+		objectmanager.livesLeft = 3;
+		objectmanager.emu.x = 250;
 		headSpawn = new Timer(1000, objectmanager);
 		headSpawn.start();
 		timer.start();
-objectmanager.score=0;
-	
-	
-		
-		
+		objectmanager.score = 0;
+
 	}
 
 	@Override
@@ -138,18 +138,17 @@ objectmanager.score=0;
 	}
 
 	void drawMenuState(Graphics g) {
-		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
+
 		g.setColor(Color.BLACK);
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
-		g.drawImage(animatedEmuImg, 30, 500, 300,290, null);
+		g.drawImage(animatedEmuImg, 30, 500, 300, 290, null);
 		g.setColor(Color.YELLOW);
 		g.setFont(titleFont);
 		g.drawString("Emu Roll", 900, 200);
 		g.setFont(emuFont);
 		g.drawString("emu vs mike", 900, 250);
 		g.setFont(regularFont);
-		g.drawString("Instructions: Use arrow keys to go up, left, and right.Avoid obstacles and jump over them", 300,
-				500);
+		g.drawString("Press SPACE for instructions", 800, 500);
 		g.drawString("Game created by Jessie Shen", 800, 380);
 		g.drawString("Press ENTER to start the war!!", 750, 700);
 	}
@@ -162,29 +161,27 @@ objectmanager.score=0;
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
 		g.setColor(new Color(186, 212, 255));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 400);
-		g.drawImage(cloudImg, 1000, 100, 200, 100, null);
-		if(objectmanager.emu.isAlive) {	
-			if(objectmanager.livesLeft>0) {
+
+		if (objectmanager.emu.isAlive) {
+			if (objectmanager.livesLeft > 0) {
 				g.drawImage(pixelheartImg, 70, 70, 90, 85, null);
 			}
-			if(objectmanager.livesLeft>1) {
-			g.drawImage(pixelheartImg, 150, 70, 90, 85, null);
+			if (objectmanager.livesLeft > 1) {
+				g.drawImage(pixelheartImg, 150, 70, 90, 85, null);
 			}
-			if(objectmanager.livesLeft>2) {
-			g.drawImage(pixelheartImg, 230, 70, 90, 85, null);	
+			if (objectmanager.livesLeft > 2) {
+				g.drawImage(pixelheartImg, 230, 70, 90, 85, null);
 			}
 		}
-		
-		if(objectmanager.emu.isAlive==false) {
-			g.drawImage(noColorPixelHeartImg, 230, 70, 90, 85, null);
-		}
+
+//		if (objectmanager.emu.isAlive == false) {
+//			g.drawImage(noColorPixelHeartImg, 230, 70, 90, 85, null);
+//		}
 		objectmanager.draw(g);
 
 	}
 
 	void drawEndState(Graphics g) {
-		objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
-
 		g.setColor(new Color(130, 9, 31));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
 		g.drawImage(ostrichImg, 100, 300, 400, 400, null);
@@ -195,7 +192,7 @@ objectmanager.score=0;
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
 		g.drawString("Press ENTER to restart", 700, 500);
-		g.drawString("-You earned "+ objectmanager.score+ " points-", 750, 700);
+		g.drawString("-You earned " + objectmanager.score + " points-", 750, 700);
 
 	}
 
@@ -222,12 +219,11 @@ objectmanager.score=0;
 				startGame();
 				objectmanager.playSound("crow_caw.wav");
 			}
-		
 
 			else if (CURRENT_STATE == GAME_STATE) {
 
 				CURRENT_STATE = END_STATE;
-
+				objectmanager.playSound("162800__timgormly__8-bit-flyby.wav");
 			}
 
 			else if (CURRENT_STATE == END_STATE) {
@@ -236,7 +232,17 @@ objectmanager.score=0;
 				startGame();
 			}
 		}
+		if (e.getKeyCode() == KeyEvent.VK_UP) {
+			emu.jump();
 
+		}
+		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+			JOptionPane.showMessageDialog(null,
+					"Instructions: You are the emu, and you are trying to reach a high score by dodging the rolling heads, and the heads that are coming from the sky.\n"
+							+ "Use the left and right arrow keys to move, and the up arrow key with the left or right to jump.\n"
+							+ "You will get 3 lives, and your lives are kept track of on the top left corner. Have fun!!");
+
+		}
 	}
 
 	@Override
@@ -248,9 +254,6 @@ objectmanager.score=0;
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			emu.right = false;
 		}
-		if(e.getKeyCode()==KeyEvent.VK_UP) {
-			emu.jump();
 
-		}
 	}
 }

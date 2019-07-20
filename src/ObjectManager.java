@@ -9,14 +9,15 @@ import javax.swing.JApplet;
 
 public class ObjectManager implements ActionListener {
 	Emu emu;
+	int cloudX=1000;
+	int cloudY=100;
 	public static AudioClip crowCaw;
 	public static AudioClip endgame;
 	int score = 0;
 	long enemyTimer = 0;
 	long slidingEnemyTimer = 0;
 	int livesLeft;
-//	int enemySpawnTime= 700;
-	int enemySpawnTime = 1000000000;
+	int enemySpawnTime = 800;
 	int slidingenemySpawnTime = 12000;
 	ArrayList<MikesHead> heads = new ArrayList<MikesHead>();
 	ArrayList<MikesHead> slidingheads = new ArrayList<MikesHead>();
@@ -40,6 +41,10 @@ public class ObjectManager implements ActionListener {
 
 		}
 		slidingenemySpawnTime -= 0.00000000000000001;
+		cloudX--;
+		if(cloudX<-200) {
+			cloudX=MikeMackEmu.WIDTH;
+		}
 	}
 
 	void draw(Graphics g) {
@@ -52,6 +57,7 @@ public class ObjectManager implements ActionListener {
 			slidingheads.get(i).draw(g);
 
 		}
+		g.drawImage(GamePanel.cloudImg, cloudX, cloudY, 200, 100, null);
 	}
 
 	public void manageEnemies() {
@@ -110,13 +116,13 @@ public class ObjectManager implements ActionListener {
 
 	public void checkCollision() {
 		for (MikesHead mikeshead : heads) {
-			
+
 			if (emu.collidesWith(mikeshead.collisionBox)) {
 				livesLeft--;
 				mikeshead.isAlive = false;
 				if (livesLeft < 1) {
 					emu.isAlive = false;
-				
+					playSound("162800__timgormly__8-bit-flyby.wav");
 					System.out.println("hi");
 				}
 
@@ -128,10 +134,10 @@ public class ObjectManager implements ActionListener {
 			if (emu.collidesWith(mikeshead.collisionBox)) {
 
 				livesLeft--;
-				mikeshead.isAlive=false;
+				mikeshead.isAlive = false;
 				if (livesLeft < 1) {
 					emu.isAlive = false;
-					
+
 					System.out.println("hello");
 				}
 

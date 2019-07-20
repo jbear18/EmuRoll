@@ -34,8 +34,8 @@ public class Emu extends GameObject {
 		if (isJumping) {
 			velocity--;
 			y = y - velocity;
-			if (y > 300) {
-				y = 300;
+			if (y > 400) {
+				y = 400;
 				isJumping = false;
 			}
 		}
@@ -51,7 +51,7 @@ public class Emu extends GameObject {
 
 	public void jump() {
 		isJumping = true;
-		velocity = 15;
+		velocity = 25;
 
 	}
 

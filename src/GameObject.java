@@ -20,15 +20,15 @@ public class GameObject {
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		 collisionBox = new Rectangle(x, y, width, height);
+		collisionBox = new Rectangle(x, y, width, height);
 	}
 
 	void update() {
-		collisionBox.setBounds(x,y,width,height);
+		collisionBox.setBounds(x, y, width, height);
 	}
 
 	void draw(Graphics g) {
-	   g.setColor(Color.red);
-	   g.drawRect(x, y, width, height);
+//		g.setColor(Color.red);
+//		g.drawRect(x, y, width, height);
 	}
 }

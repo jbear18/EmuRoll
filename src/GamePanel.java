@@ -71,7 +71,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 			cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
 			emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
 			evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
-			pixelheartImg = ImageIO.read(this.getClass().getResourceAsStream("pixelheart.jpg"));
+			pixelheartImg = ImageIO.read(this.getClass().getResourceAsStream("pixelheart.png"));
 			noColorPixelHeartImg = ImageIO.read(this.getClass().getResourceAsStream("noColorPixelHeart.png"));
 			animatedEmuImg = ImageIO.read(this.getClass().getResourceAsStream("animatedEmu.animated.gif"));
 			ostrichImg = ImageIO.read(this.getClass().getResourceAsStream("sadostrich.jpg"));

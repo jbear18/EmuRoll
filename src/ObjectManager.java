@@ -65,10 +65,12 @@ public class ObjectManager implements ActionListener {
 			heads.add((new MikesHead(new Random().nextInt(MikeMackEmu.WIDTH), 0, 65, 65, 0)));
 
 			enemyTimer = System.currentTimeMillis();
+			enemySpawnTime-=1;
 		} else if (System.currentTimeMillis() - slidingEnemyTimer >= slidingenemySpawnTime) {
 			slidingheads.add((new MikesHead(MikeMackEmu.WIDTH, 600, 65, 65, 1)));
 
 			slidingEnemyTimer = System.currentTimeMillis();
+			slidingenemySpawnTime-= 1500;
 		}
 		for (int i = 0; i < heads.size(); i++) {
 			if (heads.get(i).y > MikeMackEmu.HEIGHT) {

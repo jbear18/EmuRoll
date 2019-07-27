@@ -94,6 +94,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		objectmanager.livesLeft = 3;
 		objectmanager.emu.x = 250;
 		headSpawn = new Timer(1000, objectmanager);
+		objectmanager.enemySpawnTime=800;
+		objectmanager.slidingenemySpawnTime=12000;
 		headSpawn.start();
 		timer.start();
 		objectmanager.score = 0;
@@ -155,7 +157,6 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.green);
-
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, MikeMackEmu.HEIGHT);
 		g.setColor(new Color(141, 255, 2));
 		g.fillRect(0, 0, MikeMackEmu.WIDTH, 500);
@@ -173,7 +174,8 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				g.drawImage(pixelheartImg, 230, 70, 90, 85, null);
 			}
 		}
-
+g.setColor(Color.black);
+g.drawString(objectmanager.score+ "", 200,50);
 //		if (objectmanager.emu.isAlive == false) {
 //			g.drawImage(noColorPixelHeartImg, 230, 70, 90, 85, null);
 //		}
@@ -238,9 +240,10 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
 			JOptionPane.showMessageDialog(null,
-					"Instructions: You are the emu, and you are trying to reach a high score by dodging the rolling heads, and the heads that are coming from the sky.\n"
+					"You are the emu.\n"
+					+ "Dodge the rolling heads, and the heads that are coming from the sky.\n"
 							+ "Use the left and right arrow keys to move, and the up arrow key with the left or right to jump.\n"
-							+ "You will get 3 lives, and your lives are kept track of on the top left corner. Have fun!!");
+							+ "You will get 3 lives, which are kept track as hearts. Have fun (If you lasts long enough, there is a crazy SURPRISE)!!");
 
 		}
 	}

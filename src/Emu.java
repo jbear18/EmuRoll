@@ -25,11 +25,13 @@ public class Emu extends GameObject {
 
 	void update() {
 		super.update();
-		if (left == true) {
+		if (left == true && x>0) {
 			x -= speed;
+		
 		}
-		if (right == true) {
+		if (right == true && x< MikeMackEmu.WIDTH) {
 			x += speed;
+			
 		}
 		if (isJumping) {
 			velocity--;

@@ -102,18 +102,8 @@ public class ObjectManager implements ActionListener {
 	}
 
 	public void purgeAllObjects() {
-		for (int i = 0; i < heads.size(); i++) {
-
-			heads.remove(i);
-			System.out.println(i);
-
-		}
-		for (int i = 0; i < slidingheads.size(); i++) {
-
-			slidingheads.remove(i);
-			System.out.println(i);
-
-		}
+		heads.clear();
+		slidingheads.clear();
 	}
 
 	public void checkCollision() {

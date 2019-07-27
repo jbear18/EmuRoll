@@ -29,13 +29,17 @@ public class Emu extends GameObject {
 			x -= speed;
 		
 		}
-		if (right == true && x< MikeMackEmu.WIDTH) {
+		if (right == true && x< MikeMackEmu.WIDTH - width) {
 			x += speed;
 			
 		}
 		if (isJumping) {
 			velocity--;
 			y = y - velocity;
+			if(y<0) {
+				y+=5;
+				velocity=0;
+			}
 			if (y > 400) {
 				y = 400;
 				isJumping = false;

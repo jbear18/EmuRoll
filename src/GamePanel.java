@@ -18,6 +18,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 	Timer headSpawn;
 	ObjectManager objectmanager;
 
+
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
 	public static BufferedImage evilguyImg;
@@ -174,8 +175,9 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 				g.drawImage(pixelheartImg, 230, 70, 90, 85, null);
 			}
 		}
+		g.setFont(regularFont);
 g.setColor(Color.black);
-g.drawString(objectmanager.score+ "", 200,50);
+g.drawString("Score:" + objectmanager.score+ "", 200,50);
 //		if (objectmanager.emu.isAlive == false) {
 //			g.drawImage(noColorPixelHeartImg, 230, 70, 90, 85, null);
 //		}
@@ -194,7 +196,7 @@ g.drawString(objectmanager.score+ "", 200,50);
 		g.drawString("...death", 900, 250);
 		g.setFont(regularFont);
 		g.drawString("Press ENTER to restart", 700, 500);
-		g.drawString("-You earned " + objectmanager.score + " points-", 750, 700);
+		g.drawString("-Your score is " + objectmanager.score + "-", 750, 700);
 
 	}
 

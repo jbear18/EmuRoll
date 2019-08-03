@@ -45,6 +45,7 @@ public class ObjectManager implements ActionListener {
 		if(cloudX<-200) {
 			cloudX=MikeMackEmu.WIDTH;
 		}
+		
 	}
 
 	void draw(Graphics g) {

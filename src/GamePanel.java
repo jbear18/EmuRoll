@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 
 	public static BufferedImage cloudImg;
 	public static BufferedImage emuImg;
+	public static BufferedImage emuLeftImg;
 	public static BufferedImage evilguyImg;
 	public static BufferedImage pixelheartImg;
 	public static BufferedImage noColorPixelHeartImg;
@@ -74,6 +75,7 @@ public class GamePanel extends JPanel implements ActionListener, KeyListener {
 		try {
 			cloudImg = ImageIO.read(this.getClass().getResourceAsStream("cloud.png"));
 			emuImg = ImageIO.read(this.getClass().getResourceAsStream("emu.png"));
+			emuLeftImg = ImageIO.read(this.getClass().getResourceAsStream("emuLeft.png"));
 			evilguyImg = ImageIO.read(this.getClass().getResourceAsStream("evilguy.gif"));
 			pixelheartImg = ImageIO.read(this.getClass().getResourceAsStream("pixelheart.png"));
 			noColorPixelHeartImg = ImageIO.read(this.getClass().getResourceAsStream("noColorPixelHeart.png"));
@@ -240,12 +242,12 @@ g.drawString("Score:" + objectmanager.score+ "", 200,50);
 			emu.jump();
 
 		}
-		if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+		if (e.getKeyCode() == KeyEvent.VK_SPACE && CURRENT_STATE== MENU_STATE) {
 			JOptionPane.showMessageDialog(null,
 					"You are the emu.\n"
 					+ "Dodge the rolling heads, and the heads that are coming from the sky.\n"
 							+ "Use the left and right arrow keys to move, and the up arrow key with the left or right to jump.\n"
-							+ "You will get 3 lives, which are kept track as hearts. Have fun (If you lasts long enough, there is a crazy SURPRISE)!!");
+							+ "You will get 3 lives, which are kept track as hearts. Have fun (If you last long enough, there is a crazy SURPRISE)!!");
 
 		}
 	}

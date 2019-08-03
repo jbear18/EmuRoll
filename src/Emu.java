@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public class Emu extends GameObject {
@@ -25,20 +26,20 @@ public class Emu extends GameObject {
 
 	void update() {
 		super.update();
-		if (left == true && x>0) {
+		if (left == true && x > 0) {
 			x -= speed;
-		
+
 		}
-		if (right == true && x< MikeMackEmu.WIDTH - width) {
+		if (right == true && x < MikeMackEmu.WIDTH - width) {
 			x += speed;
-			
+
 		}
 		if (isJumping) {
 			velocity--;
 			y = y - velocity;
-			if(y<0) {
-				y+=5;
-				velocity=0;
+			if (y < 0) {
+				y += 5;
+				velocity = 0;
 			}
 			if (y > 400) {
 				y = 400;
@@ -69,13 +70,15 @@ public class Emu extends GameObject {
 	}
 
 	void draw(Graphics g) {
-		g.drawImage(GamePanel.emuImg, x, y, width, height, null);
+		
+		if(left==true) {
+			g.drawImage(GamePanel.emuLeftImg, x, y, width, height, null);
+		}else {
+			g.drawImage(GamePanel.emuImg, x, y, width, height, null);
+			
+		}
+		
 		super.draw(g);
-//		g.setColor(Color.blue);
-//		g.drawRect(head.x, head.y, head.width, head.height);
-//		g.setColor(Color.BLACK);
-//		g.drawRect(body.x, body.y, body.width, body.height);
-//		g.drawRect(legs.x, legs.y, legs.width, legs.height);
-//		g.drawRect(neck.x, neck.y, neck.width, neck.height);
+
 	}
 }
